@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All</title>
+</head>
+<body>
+    <table border = 1>
+        <th>Users</th>
+         {% for key, value in users.items() %}
+            <tr>
+               <th> {{ key }} </th>
+               <td> {{ value }} </td>
+            </tr>
+         {% endfor %}
+     </table>
+    <table border = 1>
+        <th>Wish List</th>
+        {% for key, value in wish_list.items() %}
+            <tr>
+               <th> {{ key }} </th>
+               <td> {{ value }} </td>
+            </tr>
+         {% endfor %}
+      </table>
+</body>
+</html>
