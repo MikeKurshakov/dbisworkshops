@@ -1,0 +1,81 @@
+<!doctype html>
+<style type="text/css">
+.login-container{
+    margin: 0 auto;
+    width: 50%;
+    padding: 100px;
+}
+
+.login-form-1{
+    margin: 0 auto;
+    padding: 10%;
+    background-image: url("static/LogInBackground.jpg");
+    background-size: cover;
+    background-clip: border-box;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+.login-form-1 h3{
+    text-align: center;
+    margin-bottom:12%;
+    color:#fff;
+}
+
+.btnSubmit{
+    font-weight: 600;
+    width: 45%;
+    color: #040505;
+    background-color: #fff;
+    border: none;
+    border-radius: 1.5rem;
+    padding:1%;
+}
+.btnSubmit:hover{
+    font-weight: 600;
+    width: 45%;
+    color: #040505;
+    background-color: lavender;
+    border: none;
+    border-radius: 1.5rem;
+    padding:1%;
+}
+.btnSignUp{
+    color: lightgray;
+    font-weight: 600;
+    text-decoration: none;
+}
+.btnSignUp:hover{
+    text-decoration:none;
+    color:white;
+}
+</style>
+<head>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<html>
+<body>
+<div class="container login-container" align="center">
+            <div class="row">
+               <div class="col-md-6 login-form-1">
+                <form action = "/login" method = "POST">
+                    <h3>Login Form </h3>
+
+                        <div class="form-group">
+                            {{ form.login(class_="form-control",placeholder="Your Login *") }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.password(class_="form-control",placeholder="Your Password *") }}
+                        </div>
+                        <div class="form-group">
+					        {{ form.submit(class_="btnSubmit") }}
+                        </div>
+                        <div class="form-group">
+                            <a href="/registration" class="btnSignUp">Sign up</a>
+                        </div>
+                </form>
+                </div>
+            </div>
+</div>
+   </body>
+</html>

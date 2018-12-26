@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+<style type="text/css">
+	 a.fa-info-circle:visited {
+  color: grey;
+}
+    a.fa-info-circle:link {
+  color: grey;
+}
+    a.fa-info-circle:hover {
+       color: lightgray;
+    }
+    html { overflow-y: hidden; }
+    a.fa-times-circle:visited {
+  color: grey;
+}
+    a.fa-times-circle:link {
+  color: grey;
+}
+    a.fa-times-circle:hover {
+  color: red;
+}
+	ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:not(.active):hover {
+  background-color: #111;
+}
+
+li a.user {
+	pointer-events: none;
+}
+	.active {
+  background-color: #868e96;
+		pointer-events: none;
+      }
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons/favicon.ico')}}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/animate/animate.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/select2/select2.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/perfect-scrollbar/perfect-scrollbar.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/util.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css')}}">
+<!--===============================================================================================-->
+    <title>Bookmark list</title>
+</head>
+<body>
+
+<div class="w3-container ">
+      <ul>
+        <li><a href="/home">Home</a></li>
+		  {%if login %}
+        <li><a href="/profile">User Profile</a></li>
+        <li><a href="#" class="active">Bookmarks List</a></li>
+		  {% endif %}
+        <li><a href="/filterarticle">Search Article</a></li>
+         {%if (admin == 'true')%}
+        <li><a href="/administration">Administration Tab</a></li>
+         {% endif %}
+         {%if not login %}
+        <li style="float:right"><a href="#about"><i class="fas fa-sign-in-alt"></i> Sign in</a></li>
+         {% endif %}
+         {%if not login %}
+        <li style="float:right"><a href="#about"><i class="fas fa-user"></i> Sign up</a></li>
+         {% endif %}
+		           {%if login %}
+        <li style="float:right"><a href="/logout"><i class="fas fa-sign-out-alt"></i> Log out</a></li>
+         {% endif %}
+         {%if login %}
+        <li style="float:right"><a href="#about" class="user"><i class="far fa-user"></i> {{login}}</a></li>
+         {% endif %}
+		  {%if (editor == 'true') %}
+        <li style="float:right"><a href="/addarticle"><i class="fas fa-plus"></i> Add article </a></li>
+         {% endif %}
+      </ul>
+   </div>
+    <div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100 ver1 m-b-0">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+                                    <th class="cell100 column1">Section</th>
+									<th class="cell100 column2">Header</th>
+									<th class="cell100 column3">Article</th>
+									<th class="cell100 column4">Actions</th>
+								</tr>
+                            </thead>
+						</table>
+					</div>
+
+                    <div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+                            {% for value in result %}
+								<tr class="row100 body">
+									<td class="cell100 column1">{{ value[0] }}</td>
+									<td class="cell100 column2">{{ value[2] }}</td>
+									<td class="cell100 column3">{{ value[3][0:5] + '...' }}</td>
+									<td class="cell100 column4"><a href="/showarticle/{{value[1]}}" class="fas fa-info-circle"></a>&nbsp&nbsp&nbsp&nbsp
+										<a href="/deletewish/{{value[1]}}" class="fas fa-times-circle"></a>
+                                    </td>
+								</tr>
+                            {% endfor %}
+                            </tbody>
+						</table>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+
+<!--===============================================================================================-->
+	<script src="static/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/vendor/bootstrap/js/popper.js"></script>
+	<script src="static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+
+
+	</script>
+<!--===============================================================================================-->
+	<script src="static/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+<style type="text/css">
+     a.fa-plus-circle:visited {
+  color: grey;
+}
+    a.fa-plus-circle:link {
+  color: grey;
+}
+    a.fa-plus-circle:hover {
+  color: green;
+}a.fa-trash:visited {
+  color: grey;
+}
+    a.fa-trash:link {
+  color: grey;
+}
+    a.fa-trash:hover {
+  color: red;
+}
+     a.fa-edit:visited {
+  color: green;
+}
+    a.fa-edit:link {
+  color: green;
+}
+    a.fa-edit:hover {
+  color: greenyellow;
+}
+ html { overflow-y: hidden; }
+       thead td {
+   text-align: center;
+}
+    table {
+  border-collapse: collapse;
+  width: 50%;
+}
+
+    th {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    tr:nth-child(even) {background-color: #f2f2f2;}
+        a.fa-info-circle:visited {
+  color: grey;
+}
+    a.fa-info-circle:link {
+  color: grey;
+}
+    a.fa-info-circle:hover {
+       color: lightgray;
+    }
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:not(.active):hover {
+  background-color: #111;
+}
+
+li a.user {
+	pointer-events: none;
+}
+	.active {
+  background-color: #868e96;
+		pointer-events: none;
+      }
+
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <title>Search articles</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons/favicon.ico')}}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/animate/animate.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/select2/select2.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/perfect-scrollbar/perfect-scrollbar.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/util.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css')}}">
+<!--===============================================================================================-->
+</head>
+<body>
+<div class="w3-container ">
+      <ul class="form">
+        <li><a href="/home">Home</a></li>
+         {%if login %}
+        <li><a href="/profile">User Profile</a></li>
+        <li><a href="/wishlist">Bookmarks List</a></li>
+          {% endif %}
+        <li><a href="/filterarticle">Search Article</a></li>
+         {%if (admin == 'true')%}
+        <li><a href="#" class="active">Administration Tab</a></li>
+         {% endif %}
+         {%if login %}
+        <li style="float:right"><a href="/logout"><i class="fas fa-sign-out-alt"></i> Log out</a></li>
+         {% endif %}
+         {%if login %}
+        <li style="float:right"><a href="#about" class="user"><i class="far fa-user"></i> {{login}}</a></li>
+         {% endif %}
+          {%if (editor == 'true') %}
+        <li style="float:right"><a href="/addarticle"><i class="fas fa-plus"></i> Add article </a></li>
+         {% endif %}
+         {%if not login %}
+        <li style="float:right"><a href="/login"><i class="fas fa-sign-in-alt"></i> Sign in</a></li>
+         {% endif %}
+         {%if not login %}
+        <li style="float:right"><a href="/registration"><i class="fas fa-user"></i> Sign up</a></li>
+         {% endif %}
+      </ul>
+   </div>
+
+                <td  style = "margin: 0 auto;"><div class="limiter" style="margin: auto; margin-right:15%;">
+           <div class="container-table100">
+               <div class="wrap-table100">
+                   <div class="table100 ver1 m-b-0">
+                       <div class="table100-head">
+                           <table>
+                               <thead>
+                                   <tr class="row100 head">
+                                       <th class="cell100 column1">User name</th>
+                                       <th class="cell100 column2">Actions</th>
+                                   </tr>
+                               </thead>
+                           </table>
+                       </div>
+
+                       <div class="table100-body js-pscroll">
+                           <table>
+                               <tbody>
+                               {% for value in result %}
+                                   <tr class="row100 body">
+                                       <td class="cell100 column1">{{ value[0] }}</td>
+									   <td class="cell100 column2" ><a href="/userinfo/{{value[0]}}" class="fas fa-info-circle"></a>
+                                                                &nbsp;
+                                                                    <a href="/edituser/{{value[0]}}" class="fas fa-edit"></a>
+                                                                &nbsp;
+                                                                     <a href="/deleteuser/{{value[0]}}" class="fas fa-trash"></a>
+                                       </td>
+                                   </tr>
+                               {% endfor %}
+                               </tbody>
+                           </table>
+                       </div>
+                   </div>
+                   <br>
+                   <a href="/adduser" class="fas fa-plus-circle fa-w-16 fa-5x" style="margin-left: 80%"></a>
+               </div>
+           </div>
+       </div>
+   </td>
+
+
+
+         </fieldset>
+      </form>
+<!--===============================================================================================-->
+       <script src="static/vendor/jquery/jquery-3.2.1.min.js"></script>
+   <!--===============================================================================================-->
+       <script src="static/vendor/bootstrap/js/popper.js"></script>
+       <script src="static/vendor/bootstrap/js/bootstrap.min.js"></script>
+   <!--===============================================================================================-->
+       <script src="static/vendor/select2/select2.min.js"></script>
+   <!--===============================================================================================-->
+       <script src="static/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+       <script>
+           $('.js-pscroll').each(function(){
+               var ps = new PerfectScrollbar(this);
+
+               $(window).on('resize', function(){
+                   ps.update();
+               })
+           });
+
+
+       </script>
+   <!--===============================================================================================-->
+       <script src="static/js/main.js"></script>
+</body>
+</html>

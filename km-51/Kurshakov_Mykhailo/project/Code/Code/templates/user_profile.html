@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <title>User profile</title>
+<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+<style type="text/css">
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:not(.active):hover {
+  background-color: #111;
+}
+
+li a.user {
+	pointer-events: none;
+}
+	.active {
+  background-color: #868e96;
+		pointer-events: none;
+      }
+
+    .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+    </style>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons/favicon.ico')}}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/animate/animate.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/select2/select2.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/perfect-scrollbar/perfect-scrollbar.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/util.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css')}}">
+<!--===============================================================================================-->
+
+</head>
+<body>
+
+   <div class="w3-container ">
+      <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/profile" class = "active">User Profile</a></li>
+          {%if login %}
+        <li><a href="/wishlist">Bookmarks List</a></li>
+          {% endif %}
+        <li><a href="/filterarticle">Search Article</a></li>
+         {%if (admin == 'true')%}
+        <li><a href="/administration">Administration Tab</a></li>
+         {% endif %}
+          {%if login %}
+        <li style="float:right"><a href="/logout"><i class="fas fa-sign-out-alt"></i> Log out</a></li>
+         {% endif %}
+         {%if login %}
+        <li style="float:right"><a href="#about" class="user"><i class="far fa-user"></i>  {{login}}</a></li>
+         {% endif %}
+          {%if (editor == 'true') %}
+        <li style="float:right"><a href="/addarticle"><i class="fas fa-plus"></i> Add article </a></li>
+         {% endif %}
+         {%if not login %}
+        <li style="float:right"><a href="#about"><i class="fas fa-sign-in-alt"></i> Sign in</a></li>
+         {% endif %}
+         {%if not login %}
+        <li style="float:right"><a href="#about"><i class="fas fa-user"></i> Sign up</a></li>
+         {% endif %}
+      </ul>
+   </div>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+    <h2 style="text-align:center">User Profile Card</h2>
+
+    <div class="card">
+      <h1>{{ user[0][2] }} {{ user[0][3] }}</h1>
+        <br>
+   <br>
+      <p>Login: {{ user[0][0] }}</p>
+        <br>
+      <p>Email: {{ user[0][4] }}</p>
+        <br>
+      <p>Role: {{ user[0][5] }}</p>
+    </div>
+
+
+
+   </body>
+</html>

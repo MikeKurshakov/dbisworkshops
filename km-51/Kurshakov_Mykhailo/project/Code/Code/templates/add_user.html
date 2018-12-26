@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+<style type="text/css">
+     html { overflow-y: hidden; }
+       thead td {
+   text-align: center;
+}
+    table {
+  border-collapse: collapse;
+  width: 50%;
+}
+
+    th {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    tr:nth-child(even) {background-color: #f2f2f2;}
+        a.fa-info-circle:visited {
+  color: grey;
+}
+    a.fa-info-circle:link {
+  color: grey;
+}
+    a.fa-info-circle:hover {
+       color: lightgray;
+    }
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:not(.active):hover {
+  background-color: #111;
+}
+
+li a.user {
+	pointer-events: none;
+}
+	.active {
+  background-color: #868e96;
+		pointer-events: none;
+      }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Add new user</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons/favicon.ico')}}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/animate/animate.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/select2/select2.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/perfect-scrollbar/perfect-scrollbar.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/util.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css')}}">
+<!--===============================================================================================-->
+</head>
+<body>
+<div class="w3-container ">
+      <ul class="form">
+        <li><a href="/home">Home</a></li>
+         {%if login %}
+        <li><a href="/profile">User Profile</a></li>
+        <li><a href="/wishlist">Bookmarks List</a></li>
+          {% endif %}
+        <li><a href="/filterarticle">Search Article</a></li>
+         {%if (admin == 'true')%}
+        <li><a href="/administration">Administration Tab</a></li>
+         {% endif %}
+         {%if login %}
+        <li style="float:right"><a href="/logout"><i class="fas fa-sign-out-alt"></i> Log out</a></li>
+         {% endif %}
+         {%if login %}
+        <li style="float:right"><a href="#about" class="user"><i class="far fa-user"></i> {{login}}</a></li>
+         {% endif %}
+          {%if (editor == 'true') %}
+        <li style="float:right"><a href="/addarticle"><i class="fas fa-plus"></i> Add article </a></li>
+         {% endif %}
+         {%if not login %}
+        <li style="float:right"><a href="/login"><i class="fas fa-sign-in-alt"></i> Sign in</a></li>
+         {% endif %}
+         {%if not login %}
+        <li style="float:right"><a href="/registration"><i class="fas fa-user"></i> Sign up</a></li>
+         {% endif %}
+      </ul>
+   </div>
+
+     <form action = {{ action }} method = "POST">
+         <fieldset>
+
+            {{ form.login.label }} {{ form.login }} <br/>
+            {{ form.password.label }} {{ form.password }} <br/>
+            {{ form.email.label }} {{ form.email }} <br/>
+            {% if "/adduser" in action %}
+            {{ form.role.label }} {{ form.role }}  <br/>
+            {% endif %}
+            {{ form.first_name.label }} {{ form.first_name }} <br/>
+            {{ form.last_name.label }} {{ form.last_name }} <br/>
+
+            {{ form.submit }}
+
+
+            </div>
+
+         </fieldset>
+      </form>
+
+</body>
+</html>
